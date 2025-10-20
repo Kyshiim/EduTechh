@@ -1,6 +1,5 @@
 package com.EduTech.cl.EduTech.Model;
 
-import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,60 +15,57 @@ import lombok.Generated;
 @Table(name = "inscripcion")
 public class Inscripcion {
     @Id
-    @GeneratedValue(
-        strategy = GeneratedValue.IDENTITY
-    )
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idInscripcion;
-    @column(
-        unique = true,
-        length = 9,
-        nullable = false
-    )
 
+    @Column(nullable = false)
     private Date fecha;
-    @column(
-        nullable = false
-    )
 
+    @Column(nullable = false)
     private String estado;
+
     public Inscripcion() {
     }
 
-    
-    @Generated
     public Integer getIdInscripcion() {
         return idInscripcion;
     }
 
-    @Generated
-    public Date getFecha() {
+    private Date getFecha() {
         return fecha;
     }
 
-    @Generated
     public String getEstado() {
         return estado;
     }
 
-    @Generated
     public void setIdInscripcion(Integer idInscripcion) {
         this.idInscripcion = idInscripcion;
     }
 
-    @Generated
-    public void setFecha(Date fecha) {
+    public void setFecha(final Date fecha) {
         this.fecha = fecha;
     }
 
-    @Generated
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
+
+    @Generated
+    public boolean equals(final Object o) {
+        if (this == o)
+            return true;
+        else if (o == null || getClass() != o.getClass())
+            return false;
+        else if (idInscripcion == null)
+            return false;
+        else {
+            Inscripcion other = (Inscripcion) o;
+            return idInscripcion.equals(other.idInscripcion);
+        }
+    }
+
+    Object
     
-
-    
-
-
 }
