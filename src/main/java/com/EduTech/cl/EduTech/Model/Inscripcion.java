@@ -31,7 +31,7 @@ public class Inscripcion {
         return idInscripcion;
     }
 
-    private Date getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
