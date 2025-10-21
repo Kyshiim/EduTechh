@@ -42,4 +42,4 @@ public class Curso {
     public void eliminar() {
         this.estado = "NO_DISPONIBLE";
     }
-}
+} 
