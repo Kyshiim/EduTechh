@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,13 +26,7 @@ public class Curso {
     private String categoria;
 
     @Column(nullable = false)
-    private Float precio;
-
-    @Column(nullable = false)
     private String estado;
-
-    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Inscripcion> inscripciones;
 
     public void publicar() {
         this.estado = "DISPONIBLE";
