@@ -24,9 +24,6 @@ public class Inscripcion {
     @Column(nullable = false)
     private String estado;
 
-    public Inscripcion() {
-    }
-
     public Integer getIdInscripcion() {
         return idInscripcion;
     }
@@ -37,6 +34,11 @@ public class Inscripcion {
 
     public String getEstado() {
         return estado;
+    }
+
+    public Inscripcion(final Date fecha, final String estado) {
+        this.fecha = fecha;
+        this.estado = estado;
     }
 
     public void setIdInscripcion(Integer idInscripcion) {
@@ -58,14 +60,37 @@ public class Inscripcion {
             return true;
         else if (o == null || getClass() != o.getClass())
             return false;
-        else if (idInscripcion == null)
-            return false;
         else {
             Inscripcion other = (Inscripcion) o;
-            return idInscripcion.equals(other.idInscripcion);
+            return idInscripcion != null && idInscripcion.equals(other.idInscripcion);
         }
     }
 
-    Object
+    public int hashCode() {
+        int result = 1;
+        result = 59 * result + (idInscripcion == null ? 43 : idInscripcion.hashCode());
+        result = 59 * result + (fecha == null ? 43 : fecha.hashCode());
+        result = 59 * result + (estado == null ? 43 : estado.hashCode());
+    return result;
+    }
+
+    @Generated
+    public String toString() {
+        String var10000 = String.valueOf(this.getIdInscripcion());
+        return "Inscripcion(idInscripcion=" + this.getIdInscripcion() + ", fecha=" + this.getFecha() + ", estado=" + this.getEstado() + ")";
+    }
+
+    @Generated
+    public Inscripcion(){
+    }
+
+    @Generated
+    public Inscripcion(final Integer idInscripcion, final Date fecha, final String estado) {
+        this.idInscripcion = idInscripcion;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
+
+    
     
 }
