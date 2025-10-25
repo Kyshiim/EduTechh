@@ -38,10 +38,8 @@ public class CursoService {
         if (curso != null) {
             curso.publicar();
             cursoRepository.actualizar(curso);
-            return curso;
-        } else {
-            throw new RuntimeException("Curso no encontrado");
-        }
+        } 
+        return curso;
     }
 
     public Curso eliminarCurso(Integer idCurso) {
@@ -49,9 +47,7 @@ public class CursoService {
         if (curso != null) {
             curso.eliminar();
             cursoRepository.actualizar(curso);
-            return curso;
-        } else {
-            throw new RuntimeException("Curso no encontrado");
         }
+        return curso; 
     }
 }
