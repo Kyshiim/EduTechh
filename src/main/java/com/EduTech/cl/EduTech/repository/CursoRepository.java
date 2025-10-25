@@ -9,12 +9,12 @@ import java.util.List;
 public class CursoRepository {
     private List<Curso> listaCursos = new ArrayList<>();
 
-    // Obtener todos los cursos
+    
     public List<Curso> obtenerCursos() {
         return listaCursos;
     }
 
-    // Buscar un curso por su ID
+    
     public Curso buscarPorId(Integer idCurso) {
         for (Curso curso : listaCursos) {
             if (curso.getIdCurso().equals(idCurso)) {
@@ -24,13 +24,13 @@ public class CursoRepository {
         return null;
     }
 
-    // Guardar un curso
+    
     public Curso guardar(Curso curso) {
         listaCursos.add(curso);
         return curso;
     }
 
-    // Actualizar un curso
+    
     public Curso actualizar(Curso curso) {
         for (int i = 0; i < listaCursos.size(); i++) {
             if (listaCursos.get(i).getIdCurso().equals(curso.getIdCurso())) {
@@ -41,7 +41,7 @@ public class CursoRepository {
         return null;
     }
 
-    // Eliminar un curso
+    
     public void eliminar(Integer idCurso) {
         listaCursos.removeIf(curso -> curso.getIdCurso().equals(idCurso));
     }
