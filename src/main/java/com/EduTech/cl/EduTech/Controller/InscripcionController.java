@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping({"api/v1/inscripciones"})
+@RequestMapping({"api/v1/inscripcion"})
 public class InscripcionController {
     @Autowired
     private InscripcionService inscripcionService;
