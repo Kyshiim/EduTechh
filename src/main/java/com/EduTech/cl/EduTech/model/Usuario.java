@@ -30,7 +30,8 @@ public class Usuario {
     private String email;
 
     @Column(nullable = false, length = 255)
-    private String contraseña;
+    private String password;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -40,6 +41,6 @@ public class Usuario {
     private boolean activo;
 
     public enum Rol {
-        administrador, gerente_cursos, instructor, cliente
+    administrador, gerente_cursos, instructor, cliente
     }
 }
