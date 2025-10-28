@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping({"api/v1/inscripcion"})
+@RequestMapping("/api/v1/inscripcion")
 public class InscripcionController {
     @Autowired
     private InscripcionService inscripcionService;
@@ -42,13 +42,14 @@ public class InscripcionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Inscripcion> buscar(@PathVariable Integer id) {
-        try {
-            Inscripcion inscripcion = inscripcionService.encontrarPorId(id);
-            return ResponseEntity.ok(inscripcion);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+    try {
+        Inscripcion inscripcion = inscripcionService.encontrarPorId(id);
+        return ResponseEntity.ok(inscripcion);
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Inscripcion> actualizar(@PathVariable Integer id, @RequestBody Inscripcion datos) {

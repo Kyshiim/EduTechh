@@ -28,9 +28,11 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public Inscripcion encontrarPorId(Integer id) throws Exception {
-        return (Inscripcion)this.inscripcionRepository.findById(id).get();
+    public Inscripcion encontrarPorId(Integer id) {
+    return inscripcionRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Inscripción no encontrada con ID: " + id));
     }
+
 
     public void eliminarPorId(Integer id) {
         inscripcionRepository.deleteById(id);
