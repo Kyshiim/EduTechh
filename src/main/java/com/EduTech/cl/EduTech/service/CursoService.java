@@ -12,42 +12,41 @@ public class CursoService {
     @Autowired
     private CursoRepository cursoRepository;
 
-    public List<Curso> getCursos() {
+    public List<Curso> listarCursos() {
         return cursoRepository.obtenerCursos();
     }
 
-    public Curso getCursoId(Integer idCurso) {
-        return cursoRepository.buscarPorId(idCurso);
+    public Curso encontrarCursoPorId(Integer id) {
+        return cursoRepository.buscarPorId(id);
     }
 
-    public Curso saveCurso(Curso curso) {
+    public Curso guardarCurso(Curso curso) {
         return cursoRepository.guardar(curso);
     }
 
-    public Curso updateCurso(Curso curso) {
+    public Curso actualizarCurso(Curso curso) {
         return cursoRepository.actualizar(curso);
     }
 
-    public String deleteCurso(Integer idCurso) {
-        cursoRepository.eliminar(idCurso);
-        return "Curso eliminado con éxito";
+    public void borrarCurso(Integer id) {
+        cursoRepository.eliminar(id);
     }
 
-    public Curso publicarCurso(Integer idCurso) {
-        Curso curso = cursoRepository.buscarPorId(idCurso);
+    public Curso publicarCurso(Integer id) {
+        Curso curso = cursoRepository.buscarPorId(id);
         if (curso != null) {
             curso.publicar();
-            cursoRepository.actualizar(curso);
-        } 
-        return curso;
+            return cursoRepository.actualizar(curso);
+        }
+        return null;
     }
 
-    public Curso eliminarCurso(Integer idCurso) {
-        Curso curso = cursoRepository.buscarPorId(idCurso);
+    public Curso eliminarCurso(Integer id) {
+        Curso curso = cursoRepository.buscarPorId(id);
         if (curso != null) {
             curso.eliminar();
-            cursoRepository.actualizar(curso);
+            return cursoRepository.actualizar(curso);
         }
-        return curso; 
+        return null;
     }
 }
