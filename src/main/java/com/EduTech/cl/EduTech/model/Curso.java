@@ -11,15 +11,16 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table(name = "cursos")
 public class Curso {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
-    private Integer idCurso;
+    private Long idCurso;
 
     @Column(nullable = false)
     private String titulo;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false)
     private String descripcion;
 
     @Column(nullable = false)
@@ -27,7 +28,6 @@ public class Curso {
 
     @Column(nullable = false)
     private String estado;
-
     public void publicar() {
         this.estado = "DISPONIBLE";
     }

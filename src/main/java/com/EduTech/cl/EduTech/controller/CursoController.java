@@ -65,6 +65,8 @@ public class CursoController {
         }
     }
 
+    
+
     @PutMapping("/{id}/publicar")
     public ResponseEntity<Curso> publicar(@PathVariable Integer id) {
         Curso curso = cursoService.publicarCurso(id);
