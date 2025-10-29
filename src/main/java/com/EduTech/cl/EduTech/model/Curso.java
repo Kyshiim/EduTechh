@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Data
-@Table(name = "cursos") 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "cursos")
 public class Curso {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_curso")
     private Integer idCurso;
 
     @Column(nullable = false)
@@ -35,4 +35,4 @@ public class Curso {
     public void eliminar() {
         this.estado = "NO_DISPONIBLE";
     }
-} 
+}
