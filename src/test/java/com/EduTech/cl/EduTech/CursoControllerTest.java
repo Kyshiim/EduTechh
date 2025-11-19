@@ -25,7 +25,7 @@ class CursoControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
+    @Mock
     private CursoService cursoService;
 
     @Test
