@@ -5,6 +5,7 @@ import com.EduTech.cl.EduTech.model.Curso;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CursoRepository {
@@ -40,5 +41,15 @@ public class CursoRepository {
 
     public void eliminar(Integer idCurso) {
         listaCursos.removeIf(curso -> curso.getIdCurso().equals(idCurso));
+    }
+
+    public Optional<Curso> findById(Integer idCurso) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    }
+
+    public List<Curso> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 }
