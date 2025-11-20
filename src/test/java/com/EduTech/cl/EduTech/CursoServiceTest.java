@@ -85,4 +85,3 @@ class CursoServiceTest {
         verify(cursoRepository, times(1)).eliminar(7);
     }
 }
-
