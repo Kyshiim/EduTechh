@@ -1,9 +1,11 @@
 package com.EduTech.cl.EduTech.repository;
 
-import com.EduTech.cl.EduTech.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
+import org.springframework.stereotype.Repository;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    Optional<Usuario> findByEmail(String email);
+import com.EduTech.cl.EduTech.model.Usuario;
+
+@Repository // Marca esta interfaz como un componente de acceso a datos
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+    // Hereda todos los métodos CRUD básicos (save, findById, findAll, etc.)
 }

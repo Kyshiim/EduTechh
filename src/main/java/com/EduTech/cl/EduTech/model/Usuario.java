@@ -2,45 +2,34 @@ package com.EduTech.cl.EduTech.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "usuarios")
+// Lombok @Data genera Getters, Setters, toString, etc.
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity // Anotación que mapea esta clase a una tabla de base de datos
 public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
 
-    @Column(nullable = false, length = 100)
-    private String nombre;
+    @Id // Clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementable
+    private Integer id;
 
-    @Column(nullable = false, unique = true, length = 100)
-    private String email;
+    // RUN/RUT: Columna obligatoria y única
+    @Column(name = "run", length = 13, nullable = false, unique = true)
+    private String run;
 
-    @Column(nullable = false, length = 255)
-    private String password;
+    @Column(name = "nombres", nullable = false)
+    private String nombres;
 
+    @Column(name = "apellidos", nullable = false)
+    private String apellidos;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Rol rol;
-
-    @Column(nullable = false)
-    private boolean activo;
-
-    public enum Rol {
-    administrador, gerente_cursos, instructor, cliente
-    }
+    @Column(name = "correo", nullable = false, unique = true)
+    private String correo;
 }

@@ -1,35 +1,43 @@
 package com.EduTech.cl.EduTech.service;
 
-import com.EduTech.cl.EduTech.model.Usuario;
-import com.EduTech.cl.EduTech.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UsuarioService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+import org.springframework.stereotype.Service;
 
-    public List<Usuario> obtenerTodosLosUsuarios() {
+import com.EduTech.cl.EduTech.model.Usuario;
+import com.EduTech.cl.EduTech.repository.UsuarioRepository;
+
+//  Anotación que marca la clase como un componente de servicio
+@Service 
+public class UsuarioService {
+
+    // Inyectamos el Repositorio para poder acceder a la base de datos
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    //  Método para obtener todos los usuarios
+    public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
+    //  Método para buscar un usuario por su ID
+    public Optional<Usuario> findById(Integer id) {
         return usuarioRepository.findById(id);
     }
-
-    public Usuario guardarUsuario(Usuario usuario) {
+    
+    //  Método para guardar (crear o actualizar) un usuario
+    public Usuario save(Usuario usuario) {
+        // **Lógica de Negocio aquí**
+        // Por ahora, solo guarda directamente:
         return usuarioRepository.save(usuario);
     }
-
-    public void eliminarUsuario(Long id) {
+    
+    //  Método para eliminar un usuario
+    public void deleteById(Integer id) {
         usuarioRepository.deleteById(id);
-    }
-
-    public Optional<Usuario> obtenerUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
     }
 }

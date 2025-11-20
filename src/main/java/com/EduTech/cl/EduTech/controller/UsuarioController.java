@@ -1,52 +1,69 @@
 package com.EduTech.cl.EduTech.controller;
 
-import com.EduTech.cl.EduTech.model.Usuario;
-import com.EduTech.cl.EduTech.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/usuarios")
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.EduTech.cl.EduTech.model.Usuario;
+import com.EduTech.cl.EduTech.service.UsuarioService;
+
+//  Anotación para exponer la clase como un controlador REST
+@RestController 
+// Ruta base para todos los endpoints de este controlador
+@RequestMapping("/api/usuarios") 
 public class UsuarioController {
-    @Autowired
-    private UsuarioService usuarioService;
 
-    @GetMapping
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        return usuarioService.obtenerTodosLosUsuarios();
+    private final UsuarioService usuarioService;
+
+    // Inyección del Servicio
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
+    //  GET: Obtener todos los usuarios (Ruta: /api/usuarios)
+    @GetMapping 
+    public ResponseEntity<List<Usuario>> getAllUsuarios() {
+        List<Usuario> usuarios = usuarioService.findAll();
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
+
+    //  GET: Obtener un usuario por ID (Ruta: /api/usuarios/{id})
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> obtenerUsuarioPorId(@PathVariable Long id) {
-        Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorId(id);
-        return usuario.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
+        Optional<Usuario> usuario = usuarioService.findById(id);
+        
+        // Retorna 200 OK si lo encuentra, 404 NOT FOUND si no
+        return usuario.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                      .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    // POST: Crear nuevo usuario (Ruta: /api/usuarios)
     @PostMapping
-    public Usuario crearUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.guardarUsuario(usuario);
+    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
+        Usuario nuevoUsuario = usuarioService.save(usuario);
+        // Retorna 201 CREATED (estándar para la creación exitosa)
+        return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED); 
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        if (!usuarioService.obtenerUsuarioPorId(id).isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        usuario.setIdUsuario(id);
-        return ResponseEntity.ok(usuarioService.guardarUsuario(usuario));
-    }
-
+    
+    // DELETE: Eliminar usuario por ID (Ruta: /api/usuarios/{id})
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        if (!usuarioService.obtenerUsuarioPorId(id).isPresent()) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
+        Optional<Usuario> existingUser = usuarioService.findById(id);
+        
+        if (existingUser.isPresent()) {
+            usuarioService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 No Content
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
         }
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.noContent().build();
     }
 }
