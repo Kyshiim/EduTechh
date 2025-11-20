@@ -16,16 +16,16 @@ public class OpenAPIConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("EduTech API")
-                        .description("API REST para gestión de usuarios, cursos e inscripciones")
+                        .description("API REST para gestión de inscripciones")
                         .version("v1")
-                        .contact(new Contact()
-                                .name("Equipo EduTech")
-                                .email("equipo@edutech.cl"))
+                        .contact(new Contact() .name("Equipo EduTech")
+                        .email("equipo@edutech.cl"))
                         .license(new License()
-                                .name("Apache 2.0")
-                                .url("https://www.apache.org/licenses/LICENSE-2.0")))
+                        .name("Apache 2.0")
+                        .url("https://www.apache.org/licenses/LICENSE-2.0")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Repositorio / Documentación adicional")
                         .url("")); // ajusta con tu repo real
     }
 }
+                
