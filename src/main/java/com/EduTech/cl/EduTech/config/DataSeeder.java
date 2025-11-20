@@ -32,8 +32,22 @@ public class DataSeeder {
                 u2.setApellidos("Pérez");
                 u2.setCorreo("javier.perez@edutech.cl");
                 repo.save(u2);
-
-                System.out.println(" Base de datos inicializada con 2 usuarios de ejemplo.");
+                // Usuario de Ejemplo 3
+                Usuario u3 = new Usuario();
+                u3.setRun("33.333.333-3");
+                u3.setNombres("Ronald");
+                u3.setApellidos("Mcdonald");
+                u3.setCorreo("ronald.mcdonalds@edutech.cl");
+                repo.save(u3);
+                //Usuario de Ejemplo 4
+                Usuario u4 = new Usuario();
+                u4.setRun("44.444.444-4");
+                u4.setNombres("Jhin");
+                u4.setApellidos("Khada");
+                u4.setCorreo("Jhin4khada@sublime.cl");
+                repo.save(u4);
+                
+                System.out.println(" Base de datos inicializada con 4 usuarios de ejemplo.");
             }
         };
     }
