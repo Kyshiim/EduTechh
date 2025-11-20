@@ -16,7 +16,7 @@ public class CursoService {
         return cursoRepository.obtenerCursos();
     }
 
-    public Curso encontrarCursoPorId(Integer id) {
+    public Curso encontrarCursoPorId(long id) {
         return cursoRepository.buscarPorId(id);
     }
 

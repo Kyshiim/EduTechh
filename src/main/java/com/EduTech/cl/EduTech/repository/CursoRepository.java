@@ -15,7 +15,7 @@ public class CursoRepository {
         return listaCursos;
     }
 
-    public Curso buscarPorId(Integer idCurso) {
+    public Curso buscarPorId(long idCurso) {
         for (Curso curso : listaCursos) {
             if (curso.getIdCurso().equals(idCurso)) {
                 return curso;

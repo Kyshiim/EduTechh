@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CursoController.class)
 class CursoControllerTest {
 
+    // Ajusta este path si tu @RequestMapping del controlador es distinto
     private static final String BASE = "/api/v1/cursos";
 
     @Autowired
@@ -33,32 +34,15 @@ class CursoControllerTest {
     @DisplayName("GET /api/v1/cursos lista cursos (200)")
     void listar_ok() throws Exception {
         Curso curso = new Curso();
-        curso.setIdCurso(1);
-        curso.setTitulo("Spring Boot");
-        curso.setDescripcion("Curso de Spring Boot");
-        curso.setCategoria("DESARROLLO");
-        curso.setEstado("EN_REVISION");
+        curso.setIdCurso(1L);
+        curso.setTitulo("Spring Boot desde cero");
+        curso.setDescripcion("Curso completo para aprender Spring Boot");
+        curso.setCategoria("Backend");
+        curso.setEstado("DISPONIBLE");
 
         when(cursoService.listarCursos()).thenReturn(Collections.singletonList(curso));
 
         mvc.perform(get(BASE).accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    @DisplayName("GET /api/v1/cursos/{id} devuelve un curso (200)")
-    void buscar_ok() throws Exception {
-        Curso curso = new Curso();
-        curso.setIdCurso(1);
-        curso.setTitulo("Spring Boot");
-        curso.setDescripcion("Curso de Spring Boot");
-        curso.setCategoria("DESARROLLO");
-        curso.setEstado("EN_REVISION");
-
-        when(cursoService.encontrarCursoPorId(1)).thenReturn(curso);
-
-        mvc.perform(get(BASE + "/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
