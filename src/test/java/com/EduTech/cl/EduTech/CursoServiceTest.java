@@ -2,7 +2,6 @@ package com.EduTech.cl.EduTech;
 
 import com.EduTech.cl.EduTech.model.Curso;
 import com.EduTech.cl.EduTech.repository.CursoRepository;
-import com.EduTech.cl.EduTech.service.CursoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -34,33 +34,33 @@ class CursoServiceTest {
     @Test
     @DisplayName("guardar() persiste y devuelve el curso")
     void guardar_ok() {
-        Curso curso = new Curso();
-        curso.setIdCurso(1);
-        curso.setTitulo("Spring Boot");
-        curso.setDescripcion("Curso de Spring Boot");
-        curso.setCategoria("DESARROLLO");
-        curso.setEstado("EN_REVISION");
+        Curso c = new Curso();
+        c.setIdCurso(1L);
+        c.setTitulo("Spring Boot");
+        c.setDescripcion("Curso básico");
+        c.setCategoria("Backend");
+        c.setEstado("DISPONIBLE");
 
-        when(cursoRepository.guardar(any(Curso.class))).thenReturn(curso);
+        when(cursoRepository.guardar(any(Curso.class))).thenReturn(c);
 
-        Curso guardado = cursoService.guardarCurso(curso);
+        Curso guardado = cursoService.guardar(c);
 
         ArgumentCaptor<Curso> captor = ArgumentCaptor.forClass(Curso.class);
-        verify(cursoRepository, times(1)).guardar(captor.capture());
-
+        verify(cursoRepository, times(1)).save(captor.capture());
         assertThat(captor.getValue().getTitulo()).isEqualTo("Spring Boot");
-        assertThat(guardado.getIdCurso()).isEqualTo(1);
+
+        assertThat(guardado.getIdCurso()).isEqualTo(1L);
     }
 
     @Test
     @DisplayName("listar() devuelve todos los cursos")
     void listar_ok() {
-        Curso curso1 = new Curso();
-        curso1.setIdCurso(1);
-        Curso curso2 = new Curso();
-        curso2.setIdCurso(2);
+        Curso a = new Curso();
+        a.setIdCurso(1L);
+        Curso b = new Curso();
+        b.setIdCurso(2L);
 
-        when(cursoRepository.obtenerCursos()).thenReturn(Arrays.asList(curso1, curso2));
+        when(cursoRepository.findAll()).thenReturn(Arrays.asList(a, b));
 
         List<Curso> todos = cursoService.listarCursos();
         assertThat(todos).hasSize(2);
@@ -69,19 +69,19 @@ class CursoServiceTest {
     @Test
     @DisplayName("buscarPorId() devuelve el curso cuando existe")
     void buscarPorId_ok() {
-        Curso curso = new Curso();
-        curso.setIdCurso(5);
+        Curso a = new Curso();
+        a.setIdCurso(5L);
 
-        when(cursoRepository.buscarPorId(5)).thenReturn(curso);
+        when(cursoRepository.findById(5L)).thenReturn(Optional.of(a));
 
-        Curso encontrado = cursoService.encontrarCursoPorId(5);
-        assertThat(encontrado.getIdCurso()).isEqualTo(5);
+        Curso encontrado = cursoService.encontrarPorId(5L);
+        assertThat(encontrado.getIdCurso()).isEqualTo(5L);
     }
 
     @Test
     @DisplayName("borrar() elimina por id sin errores")
     void borrar_ok() {
-        assertDoesNotThrow(() -> cursoService.borrarCurso(7));
-        verify(cursoRepository, times(1)).eliminar(7);
+        assertDoesNotThrow(() -> cursoService.eliminarPorId(7L));
+        verify(cursoRepository, times(1)).deleteById(7L);
     }
 }
