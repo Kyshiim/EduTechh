@@ -28,6 +28,7 @@ class InscripcionControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @SuppressWarnings("removal")
     @MockBean
     private InscripcionService inscripcionService;
 

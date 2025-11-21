@@ -11,6 +11,7 @@ import com.EduTech.cl.EduTech.Repository.InscripcionRepository;
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.transaction.Transactional;
 
+@SuppressWarnings("unused")
 @Service
 @Transactional
 public class InscripcionService {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/api/v1/inscripcion")
 public class InscripcionController {
