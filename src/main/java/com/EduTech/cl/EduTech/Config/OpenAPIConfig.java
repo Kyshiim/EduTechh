@@ -26,6 +26,7 @@ public class OpenAPIConfig {
                                 .url("https://www.apache.org/licenses/LICENSE-2.0")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Repositorio / Documentación adicional")
-                        .url("https://github.com/tu-org/edutech")); // ajusta con tu repo real
+                        .url("https://github.com/tu-org/edutech"));
     }
 }
+
